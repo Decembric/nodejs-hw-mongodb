@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import { MONGO_DB_VARS } from '../constants/index.js';
-import { env } from './env.js';
+import { env } from '../utils/env.js';
 
 export const initMongoConnection = async () => {
   try {
