@@ -8,6 +8,7 @@ export const getAllContacts = async ({
   perPage,
   sortOrder = SORT_ORDER.ASC,
   sortBy = '_id',
+  contactId,
 }) => {
   const limit = perPage;
   const skip = (page - 1) * perPage;
@@ -17,6 +18,7 @@ export const getAllContacts = async ({
     .limit(limit)
     .sort({ [sortBy]: sortOrder })
     .exec();
+
   const contactsCount = await contactsModel.countDocuments();
   const paginationData = calculatePaginationData(contactsCount, perPage, page);
   return {

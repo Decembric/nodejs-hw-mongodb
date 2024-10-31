@@ -16,22 +16,22 @@ import {
 
 const router = express.Router();
 
-router.use('/contacts/:contactId', isValidId('contactId'));
+router.use('/:contactId', isValidId('contactId'));
 
-router.get('/contacts', ctrlWrapper(getContactsController));
+router.get('/', ctrlWrapper(getContactsController));
 
-router.get('/contacts/:contactId', ctrlWrapper(getContactByIdController));
+router.get('/:contactId', ctrlWrapper(getContactByIdController));
 
 router.post(
-  '/contacts',
+  '/',
   validateBody(createValidationContactsSchema),
   ctrlWrapper(createContactController),
 );
 
-router.delete('/contacts/:contactId', ctrlWrapper(removeContactController));
+router.delete('/:contactId', ctrlWrapper(removeContactController));
 
 router.patch(
-  '/contacts/:contactId',
+  '/:contactId',
   validateBody(updateValidationContactsSchema),
   ctrlWrapper(updateContactByIdController),
 );
