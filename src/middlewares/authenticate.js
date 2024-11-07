@@ -3,24 +3,24 @@ import { SessionModel } from '../db/models/session.js';
 import { UserModel } from '../db/models/user.js';
 
 export const authenticate = async (req, res, next) => {
-  const { authorization } = req.headers;
-  if (typeof authorization !== 'string') {
-    return next(createHttpError(401, 'You should add access token'));
+  const authorization = req.get('Authorization');
+  if (!authorization) {
+    return next(createHttpError(401, 'Unauthorized'));
   }
 
-  const [bearer, accessToken] = authorization.split(' ', 2);
+  const [bearer, accessToken] = authorization.split(' ');
 
-  if (bearer === 'Bearer' || typeof accessToken !== 'string') {
-    return next(createHttpError(401, 'You should add access token'));
+  if (bearer !== 'Bearer' || typeof accessToken !== 'string') {
+    return next(createHttpError(401, 'Unauthorized'));
   }
 
   const session = await SessionModel.findOne({ accessToken });
 
-  if (session === null) {
-    return next(createHttpError(401, 'Session not found'));
+  if (!session) {
+    return next(createHttpError(401, 'Unauthorized'));
   }
 
-  if (new Date() > session.accessTokenValidUntil) {
+  if (new Date() > new Date(session.accessTokenValidUntil)) {
     return next(createHttpError(401, 'Access token expired'));
   }
 
@@ -30,7 +30,7 @@ export const authenticate = async (req, res, next) => {
     return next(createHttpError(401, 'Session not found'));
   }
 
-  req.user = { userId: user._id };
+  req.user = user;
 
   next();
 };

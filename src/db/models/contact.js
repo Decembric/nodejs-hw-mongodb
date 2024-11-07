@@ -25,8 +25,9 @@ const contactsSchema = new Schema(
       required: true,
       default: 'personal',
     },
-    contactId: {
+    userId: {
       type: mongoose.Schema.Types.ObjectId,
+      ref: 'user',
       required: true,
     },
   },

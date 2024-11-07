@@ -22,7 +22,9 @@ export const loginUser = async (userData) => {
   if (!areEqual) {
     throw createHttpError(401, 'Credentials are wrong');
   }
-  await SessionModel.deleteOne({ userId: user._id });
+  if (userData.email) {
+    await SessionModel.deleteOne({ userId: user._id });
+  }
   return SessionModel.create({ userId: user._id, ...createSession() });
 };
 
