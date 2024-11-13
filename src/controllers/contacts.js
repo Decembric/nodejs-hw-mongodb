@@ -1,3 +1,5 @@
+import fs from 'node:fs/promises';
+
 import createHttpError from 'http-errors';
 import {
   createNewContact,
@@ -8,6 +10,7 @@ import {
 } from '../services/contacts.js';
 import { parsePaginationParams } from '../utils/parsePaginationParams.js';
 import { parseSortParams } from '../utils/parseSortParams.js';
+import { uploadToCloudinary } from '../utils/uploadToCloudinary.js';
 
 export const getContactsController = async (req, res) => {
   const { page, perPage } = parsePaginationParams(req.query);
@@ -44,7 +47,17 @@ export const getContactByIdController = async (req, res, next) => {
 };
 
 export const createContactController = async (req, res) => {
-  const contact = await createNewContact({ ...req.body, userId: req.user._id });
+  let photo;
+  if (typeof req.file !== 'undefined') {
+    await uploadToCloudinary(req.file.path);
+    await fs.unlink(req.file.path);
+    photo = `http://localhost:3000/photos/${req.file.filename}`;
+  }
+  const contact = await createNewContact({
+    ...req.body,
+    photo,
+    userId: req.user._id,
+  });
   res.status(201).json({
     status: 201,
     message: 'Successfully created a contact!',
@@ -61,7 +74,16 @@ export const removeContactController = async (req, res, next) => {
 export const updateContactByIdController = async (req, res, next) => {
   const { contactId } = req.params;
   const { body } = req;
-  const contact = await updateContactById(contactId, req.user._id, body);
+  let photo;
+  if (typeof req.file !== 'undefined') {
+    await uploadToCloudinary(req.file.path);
+    await fs.unlink(req.file.path);
+    photo = `http://localhost:3000/photos/${req.file.filename}`;
+  }
+  const contact = await updateContactById(contactId, req.user._id, {
+    ...body,
+    photo,
+  });
   if (!contact) {
     return next(createHttpError(404, 'Contact not found'));
   }

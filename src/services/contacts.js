@@ -19,7 +19,7 @@ export const getAllContacts = async ({
     .sort({ [sortBy]: sortOrder })
     .exec();
 
-  const contactsCount = await contactsModel.countDocuments();
+  const contactsCount = await contactsModel.countDocuments({ userId });
   const paginationData = calculatePaginationData(contactsCount, perPage, page);
   return {
     data: contacts,

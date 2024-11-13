@@ -34,4 +34,13 @@ export const loginSchema = Joi.object({
   password: Joi.string().required(),
 });
 
+export const emailSchema = Joi.object({
+  email: Joi.string().email().required(),
+});
+
+export const resetMailSchema = Joi.object({
+  password: Joi.string().required(),
+  token: Joi.string().required(),
+});
+
 export const UserModel = model('user', userSchema);

@@ -1,5 +1,10 @@
 import express from 'express';
-import { registerSchema, loginSchema } from '../db/models/user.js';
+import {
+  registerSchema,
+  loginSchema,
+  emailSchema,
+  resetMailSchema,
+} from '../db/models/user.js';
 import { validateBody } from '../middlewares/validateBody.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import {
@@ -7,6 +12,8 @@ import {
   logoutUserController,
   refreshUserController,
   registerUserController,
+  resetPasswordController,
+  sendEmailController,
 } from '../controllers/users.js';
 
 const router = express.Router();
@@ -27,4 +34,15 @@ router.post('/refresh', ctrlWrapper(refreshUserController));
 
 router.post('/logout', ctrlWrapper(logoutUserController));
 
+router.post(
+  '/send-reset-email',
+  validateBody(emailSchema),
+  ctrlWrapper(sendEmailController),
+);
 export default router;
+
+router.post(
+  '/reset-pwd',
+  validateBody(resetMailSchema),
+  ctrlWrapper(resetPasswordController),
+);
