@@ -49,9 +49,9 @@ export const getContactByIdController = async (req, res, next) => {
 export const createContactController = async (req, res) => {
   let photo;
   if (typeof req.file !== 'undefined') {
-    await uploadToCloudinary(req.file.path);
+    const result = await uploadToCloudinary(req.file.path);
     await fs.unlink(req.file.path);
-    photo = `http://localhost:3000/photos/${req.file.filename}`;
+    photo = result.secure_url;
   }
   const contact = await createNewContact({
     ...req.body,
@@ -76,9 +76,9 @@ export const updateContactByIdController = async (req, res, next) => {
   const { body } = req;
   let photo;
   if (typeof req.file !== 'undefined') {
-    await uploadToCloudinary(req.file.path);
+    const result = await uploadToCloudinary(req.file.path);
     await fs.unlink(req.file.path);
-    photo = `http://localhost:3000/photos/${req.file.filename}`;
+    photo = result.secure_url;
   }
   const contact = await updateContactById(contactId, req.user._id, {
     ...body,
