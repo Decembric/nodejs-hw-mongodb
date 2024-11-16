@@ -13,7 +13,7 @@ tags:
     description: The operations for working with Authentication
 servers:
   - url: http://localhost:3000
-  - url: https://contacts-app-pavk.onrender.com/
+  - url: https://contacts-app-pavk.onrender.com
 paths:
   /contacts:
     get:

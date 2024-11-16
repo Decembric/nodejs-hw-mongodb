@@ -12,6 +12,9 @@
   "servers": [
     {
       "url": "http://localhost:3000"
+    },
+    {
+      "url": "https://contacts-app-pavk.onrender.com"
     }
   ],
   "tags": [
@@ -210,7 +213,7 @@
                   },
                   "photo": {
                     "description": "User's photo",
-                    "type": "file",
+                    "type": "string",
                     "example": "https://res.cloudinary.com/drtwzhhhr/image/upload/v1731573408/guxi4vdk5tn0tnijzarx.jpg"
                   }
                 }
