@@ -8,6 +8,7 @@ import contactsRouter from './routers/contacts.js';
 import authRouter from './routers/user.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 import { errorHandler } from './middlewares/errorHandler.js';
+import { swaggerDocs } from './middlewares/swaggerDocs.js';
 
 export const setupServer = () => {
   const app = express();
@@ -23,6 +24,8 @@ export const setupServer = () => {
   app.use(cors());
   app.use(express.json());
   app.use('/photos', express.static(path.resolve('src', 'public/photos')));
+  app.use('/api-docs', swaggerDocs());
+
   app.use(cookieParser());
   app.get('/', (req, res) => {
     res.json({ message: 'contact' });
