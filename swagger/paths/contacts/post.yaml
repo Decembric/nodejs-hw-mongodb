@@ -32,8 +32,6 @@ requestBody:
           isFavourite:
             description: 'Indicates whether it is a favorite contact or not'
             type: boolean
-            example: false
-            default: false
           contactType:
             description: 'Type of a phone number'
             type: string

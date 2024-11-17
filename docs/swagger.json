@@ -197,9 +197,7 @@
                   },
                   "isFavourite": {
                     "description": "Indicates whether it is a favorite contact or not",
-                    "type": "boolean",
-                    "example": false,
-                    "default": false
+                    "type": "boolean"
                   },
                   "contactType": {
                     "description": "Type of a phone number",
@@ -342,23 +340,7 @@
         ],
         "responses": {
           "204": {
-            "description": "Delete student by ID",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "required": [
-                    "status"
-                  ],
-                  "properties": {
-                    "status": {
-                      "type": "integer",
-                      "example": 204
-                    }
-                  }
-                }
-              }
-            }
+            "description": "No Content"
           },
           "404": {
             "$ref": "#/components/responses/404"
@@ -393,7 +375,6 @@
             "multipart/form-data": {
               "schema": {
                 "type": "object",
-                "required": [],
                 "properties": {
                   "name": {
                     "type": "string",
@@ -407,6 +388,10 @@
                     "type": "string",
                     "example": "johndoe123@gmail.com"
                   },
+                  "isFavourite": {
+                    "type": "boolean",
+                    "example": false
+                  },
                   "contactType": {
                     "type": "string",
                     "enum": [
@@ -415,6 +400,11 @@
                       "personal"
                     ],
                     "example": "personal"
+                  },
+                  "photo": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "User's photo"
                   }
                 }
               }

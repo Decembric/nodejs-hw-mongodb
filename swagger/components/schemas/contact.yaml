@@ -24,7 +24,7 @@ properties:
     example: 'johndoe123@gmail.com'
   isFavourite:
     description: 'Indicates whether it is a favorite contact or not'
-    type: boolean
+    type: 'boolean'
   contactType:
     description: 'Type of a phone number'
     type: string

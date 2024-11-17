@@ -14,16 +14,6 @@ parameters:
       example: 67319bf7c32e98f4ad14818e
 responses:
   '204':
-    description: 'Delete student by ID'
-    content:
-      application/json:
-        schema:
-          type: object
-          required:
-            - status
-          properties:
-            status:
-              type: integer
-              example: 204
+    description: 'No Content'
   '404':
     $ref: '../../../components/responses/404.yaml'

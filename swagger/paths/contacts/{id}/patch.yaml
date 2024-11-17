@@ -17,7 +17,6 @@ requestBody:
     multipart/form-data:
       schema:
         type: object
-        required: []
         properties:
           name:
             type: string
@@ -28,6 +27,9 @@ requestBody:
           email:
             type: string
             example: 'johndoe123@gmail.com'
+          isFavourite:
+            type: boolean
+            example: false
           contactType:
             type: string
             enum:
@@ -35,6 +37,10 @@ requestBody:
               - 'home'
               - 'personal'
             example: 'personal'
+          photo:
+            type: string
+            format: binary
+            description: "User's photo"
 responses:
   '200':
     description: 'Update contact by ID'
@@ -55,6 +61,6 @@ responses:
               example: 'Successfully patched a contact!'
             data:
               type: object
-              $ref: ../../../components/schemas/contact.yaml
+              $ref: '../../../components/schemas/contact.yaml'
   '404':
     $ref: '../../../components/responses/404.yaml'
