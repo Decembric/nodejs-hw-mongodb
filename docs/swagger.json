@@ -214,6 +214,7 @@
                   "photo": {
                     "description": "User's photo",
                     "type": "string",
+                    "format": "binary",
                     "example": "https://res.cloudinary.com/drtwzhhhr/image/upload/v1731573408/guxi4vdk5tn0tnijzarx.jpg"
                   }
                 }
@@ -353,10 +354,6 @@
                     "status": {
                       "type": "integer",
                       "example": 204
-                    },
-                    "message": {
-                      "type": "string",
-                      "example": "Successfully deleted a contact!"
                     }
                   }
                 }
@@ -393,7 +390,7 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
                 "type": "object",
                 "required": [],
@@ -409,10 +406,6 @@
                   "email": {
                     "type": "string",
                     "example": "johndoe123@gmail.com"
-                  },
-                  "isFavourite": {
-                    "type": "boolean",
-                    "example": true
                   },
                   "contactType": {
                     "type": "string",
@@ -505,9 +498,7 @@
           },
           "isFavourite": {
             "description": "Indicates whether it is a favorite contact or not",
-            "type": "boolean",
-            "example": false,
-            "default": false
+            "type": "boolean"
           },
           "contactType": {
             "description": "Type of a phone number",
@@ -527,6 +518,7 @@
           "photo": {
             "description": "User's photo",
             "type": "string",
+            "format": "binary",
             "example": "https://res.cloudinary.com/drtwzhhhr/image/upload/v1731573408/guxi4vdk5tn0tnijzarx.jpg"
           }
         }

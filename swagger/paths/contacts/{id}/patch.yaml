@@ -14,7 +14,7 @@ parameters:
       example: '67319bf7c32e98f4ad14818e'
 requestBody:
   content:
-    application/json:
+    multipart/form-data:
       schema:
         type: object
         required: []
@@ -28,9 +28,6 @@ requestBody:
           email:
             type: string
             example: 'johndoe123@gmail.com'
-          isFavourite:
-            type: boolean
-            example: true
           contactType:
             type: string
             enum:
