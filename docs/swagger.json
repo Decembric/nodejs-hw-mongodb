@@ -197,7 +197,7 @@
                   },
                   "isFavourite": {
                     "description": "Indicates whether it is a favorite contact or not",
-                    "type": "boolean",
+                    "type": boolean,
                     "example": false
                   },
                   "contactType": {
@@ -489,7 +489,8 @@
           },
           "isFavourite": {
             "description": "Indicates whether it is a favorite contact or not",
-            "type": "boolean"
+            "type": "boolean",
+            "example": false
           },
           "contactType": {
             "description": "Type of a phone number",
